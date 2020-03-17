@@ -41,6 +41,12 @@ Class Transaksi_Peminjaman Extends CI_Controller
 		redirect('Transaksi_Peminjaman/index');
 	}
 
+	public function cariSiswa()
+	{
+		$no = $_POST['no_anggota'];
+		echo json_encode($this->M_transaksi_peminjaman->cariSiswa($no));
+	}
+
 	public function edit()
 	{
 		$id = $this->input->post('id_transaksi');

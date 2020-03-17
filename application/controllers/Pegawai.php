@@ -7,6 +7,7 @@ Class Pegawai Extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('template');
 		$this->load->model('M_pegawai');
+		$this->load->library('encryption');
 	}
 
 	public function index()
@@ -22,11 +23,15 @@ Class Pegawai Extends CI_Controller
 		$nama_pegawai = $this->input->post('nama_pegawai');
 		$jabatan = $this->input->post('jabatan');
 		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$pass = password_hash($password, PASSWORD_DEFAULT);
+
 		$data = array(
 			'id_pegawai' => $id_pegawai,
 			'nama_pegawai' => $nama_pegawai,
 			'jabatan' => $jabatan,
-			'username' => $username
+			'username' => $username,
+			'password' => $pass
 		);
 		$this->M_pegawai->tambah($data);
 
@@ -51,10 +56,14 @@ Class Pegawai Extends CI_Controller
 		$nama_pegawai = $this->input->post('nama_pegawai');
 		$jabatan = $this->input->post('jabatan');
 		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$pass = password_hash($password, PASSWORD_DEFAULT);
+
 		$data = array(
 			'nama_pegawai' => $nama_pegawai,
 			'jabatan' => $jabatan,
-			'username' => $username
+			'username' => $username,
+			'password' => $pass
 		);
 		$where = array(
 			'id_pegawai' => $id_pegawai,);

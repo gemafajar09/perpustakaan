@@ -21,10 +21,16 @@ Class Siswa Extends CI_Controller
 		$no_anggota = $this->input->post('no_anggota');
 		$nama_siswa = $this->input->post('nama_siswa');
 		$no_hp = $this->input->post('no_hp');
+		$password = $this->input->post('password');
+		$username = $this->input->post('username');
+		$pass = password_hash($password, PASSWORD_DEFAULT);
+
 		$data = array(
 			'no_anggota' => $no_anggota,
 			'nama_siswa' => $nama_siswa,
-			'no_hp' => $no_hp
+			'no_hp' => $no_hp,
+			'password' => $pass,
+			'username' => $username
 		);
 		$this->M_siswa->tambah($data);
 
@@ -48,10 +54,17 @@ Class Siswa Extends CI_Controller
 		$no_anggota = $this->input->post('no_anggota');
 		$nama_siswa = $this->input->post('nama_siswa');
 		$no_hp = $this->input->post('no_hp');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$pass = password_hash($password, PASSWORD_DEFAULT);
+
 		$data = array(
 			'no_anggota' => $no_anggota,
 			'nama_siswa' => $nama_siswa,
-			'no_hp' => $no_hp
+			'no_hp' => $no_hp,
+			'password' => $pass,
+			'username' => $username
+
 		);
 		$where = array(
 			'no_anggota' => $no_anggota,);

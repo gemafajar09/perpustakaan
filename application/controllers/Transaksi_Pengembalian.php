@@ -75,13 +75,4 @@ Class Transaksi_Pengembalian Extends CI_Controller
 		$id_pinjam = $_POST['id_pinjam'];
 		echo json_encode($this->kembali->cariAnggota($id_pinjam));
 	}
-
-	public function sangsiBuku()
-	{
-		$tglPinjam = $_POST['tanggal_pinjam'];
-		$tglKembali = $_POST['tanggal_pengembalian'];
-		$buku = $_POST['buku'];
-		$id = $_POST['id'];
-		echo json_encode($this->kembali->sangsiBuku($tglPinjam,$tglKembali,$buku,$id));
-	}
 }
