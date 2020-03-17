@@ -29,6 +29,14 @@
 							<label>password</label>
 							<input type="password" name="password" placeholder="Password" class="form-control">
 						</div>
+						<div class="form-group">
+							<label>Login Sebagai</label>
+							<select class="form-control" name="role_login">
+								<option value="super">Kepala Sekolah</option>
+								<option value="super">Pustakawan</option>
+								<option value="minor">Siswa</option>
+							</select>
+						</div>
 						<div>
 							<button type="submit" name="login" class="btn btn-primary btn-block">login</button>
 						</div>

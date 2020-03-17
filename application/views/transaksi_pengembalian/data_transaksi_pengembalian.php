@@ -18,7 +18,10 @@
               </td>
               <td><button type="button" onclick="cariAnggota()" class="btn btn-success">Cari</button></td>
               <td>No Buku</td>
-              <td colspan="2"><input type="text" readonly id="no_buku" name="no_buku" class="form-control"></td>
+              <td colspan="2">
+                <input type="text" readonly id="no_buku" name="no_buku" class="form-control">
+                <input type="text" readonly id="jenisBuku">
+              </td>
             </tr>
             <tr>
               <td>Tahun Ajaran</td>
@@ -161,26 +164,39 @@
 				document.getElementById('no_buku').value = data[0].no_buku;
 				document.getElementById('idPegawaiPustaka').value = data[0].id_pegawai;
         document.getElementById('id').value = data[0].id_transaksi;
+        document.getElementById('jenisBuku').value = data[0].kategori ;
 				document.getElementById('tglPinjamBuku').value = data[0].tgl_pj;
-        cariSangsi(data[0].tgl_pj);
       }
     })
   }
 
-  $('#tglPengembalian').change(function(){
-    var tanggal = $(this).val();
-    var tgl_pinjam = $('#tglPinjamBuku').val();
-    var buku = $('#no_buku').val();
-    var id = $('#id').val();
-    $.ajax({
-      url: '<?= base_url('Transaksi_Pengembalian/sangsiBuku') ?>',
-      type: 'POST',
-      data: {'tanggal_pengembalian':tanggal, 'tanggal_pinjam': tgl_pinjam, 'buku': buku, 'id': id },
-      dataType: 'JSON',
-      success: function(data)
-      {
-        $('#sangsi').val(data)
-      }
-    })
-  })
+  function HitungDenda()
+  {
+    var jenis_buku = document.getElementById("jenisBuku").value;
+    var tgl_pinjam = new Date(document.getElementById("tglPinjamBuku").value).getTime();
+    var tgl_kembali = new Date(document.getElementById("tglPengembalian").value).getTime();
+    var selisih_hari = Math.floor((tgl_kembali - tgl_pinjam)/86400)/1000;
+    var denda = 0;
+    var batas_waktu_denda_minimal= 0; // hari
+    // alert(jenis_buku)
+    // jika jenis buku = ... maka batas waktu denda minimal = ...
+    if(jenis_buku == "Buku Mata Pelajaran")
+    {
+      batas_waktu_denda_minimal = 150;
+    }
+    else if(jenis_buku == "Buku Umum")
+    {
+      batas_waktu_denda_minimal = 14;
+    }
+    // alert(batas_waktu_denda_minimal)
+    if(selisih_hari > batas_waktu_denda_minimal)
+    {
+      denda = (selisih_hari - batas_waktu_denda_minimal) * 500;
+    }
+
+    document.getElementById("sangsi").value = denda;
+  }
+
+  document.getElementById("tglPengembalian").addEventListener("change", HitungDenda)
+
 </script>

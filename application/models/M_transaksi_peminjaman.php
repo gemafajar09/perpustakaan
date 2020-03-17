@@ -50,6 +50,12 @@ Class M_transaksi_peminjaman Extends CI_Model
        return $this->db->query("SELECT * FROM transaksi_pengembalian WHERE id_transaksi='$id'")->result();
     }
 
+    public function cariSiswa($id)
+    {
+        return $this->db->query("SELECT * FROM kelas_siswa WHERE no_anggota='$id'")->result();
+    }
+
+
     public function simpanEditK($data,$where)
     {
         $this->db->where($where)->update('transaksi_pengembalian',$data);
@@ -57,42 +63,6 @@ Class M_transaksi_peminjaman Extends CI_Model
 
     public function cariAnggota($id)
     {
-        return $this->db->query("SELECT * FROM transaksi_peminjaman WHERE no_anggota='$id'")->result();
-    }
-
-    public function sangsiBuku($pinjam,$kembali,$buku,$id)
-    {
-        $data =  $this->db->query("SELECT * FROM transaksi_peminjaman WHERE id_transaksi='$id'")->result();
-        $buku = $this->db->query("SELECT * FROM buku WHERE no_buku='$buku'")->result();
-        $pinjam = explode('-',$pinjam);
-        $tahun1 = $pinjam[0];
-        $bulan1 = $pinjam[1];
-        $hari1 = $pinjam[2];
-        $kembali = new eplode('-',$kembali);
-        $tahun2 = $kembali[0];
-        $bulan2 = $kembali[1];
-        $hari2 = $kembali[2];
-        $hasilTahun = $tahun2 - $tahun1;
-        $hasilBulan = $bulan2 - $bulan1;
-        if($buku[0]->kategori != 'Buku Mata Pelajaran' )
-        {
-            if(isset($hasilTahun))
-            {
-                $tahun = $hasilTahun * 365;
-            }
-            if(isset($hasilBulan))
-            {
-                $bulan = $hasilBulan * 30;
-            } 
-            $hitungHari1 = $tahun + $bulan + $hari1;
-            $hitungHari2 = $tahun + $bulan + $hari2;
-            $hasilPenjumlahan = $hitungHari2 - $hitungHari1;
-            if($hasilPenjumlahan >= 7)
-            {
-                return $denda = $hasilPenjumlahan * 500;
-            }else{
-                return $denda = 0;
-            }
-        }
+        return $this->db->query("SELECT a.*, b.* FROM transaksi_peminjaman a LEFT JOIN buku b ON a.no_buku=b.no_buku WHERE a.no_anggota='$id'")->result();
     }
 }
