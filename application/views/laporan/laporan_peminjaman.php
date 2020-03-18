@@ -5,7 +5,7 @@
             <h3>Laporan Peminjaman</h3>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table" id="dataTable">
                 <thead>
                     <tr>
                         <th>No</th>

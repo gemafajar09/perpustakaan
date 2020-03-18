@@ -8,7 +8,7 @@
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Data</button>	
 			</div>
 			<div class="card-body">
-				<table class="table">
+				<table class="table" id="dataTable">
 					<thead>
 						<tr>
 							<td>No</td>
@@ -66,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label for="">ID Pegawai</label>
-                <input type="text" required name="id_pegawai" class="form-control" placeholder="ID Pegawai">
+                <input type="text" required name="id_pegawai" value="<?php echo $user['id_pegawai']?>" class="form-control" readonly>
             </div>
                 <button class="btn btn-primary btn-block">Simpan</button>
             </div>

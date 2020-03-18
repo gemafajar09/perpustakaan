@@ -32,7 +32,8 @@
 						<div class="form-group">
 							<label>Login Sebagai</label>
 							<select class="form-control" name="role_login">
-								<option value="super">Kepala Sekolah</option>
+								<option value="">-PILIH JABATAN-</option>
+								<option value="kepsek">Kepala Sekolah</option>
 								<option value="super">Pustakawan</option>
 								<option value="minor">Siswa</option>
 							</select>

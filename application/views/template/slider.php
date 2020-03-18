@@ -5,11 +5,15 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('Admin/halaman') ?>">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">
+          <?php
+              echo $this->session->userdata('nama');
+          ?>  
+        </div>
       </a>
 
       <!-- Divider -->
@@ -17,7 +21,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?= base_url('Admin/halaman') ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -31,6 +35,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
+      <?php if($this->session->userdata('level') == "super"){?>
       <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('Buku/index') ?>">
           <i class="fas fa-fw fa-cog"></i>
@@ -49,6 +54,13 @@
         <a class="nav-link collapsed" href="<?= base_url('Kunjungan/index') ?>">
           <i class="fas fa-fw fa-cog"></i>
           <span>Data Kunjungan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="<?= base_url('Kepsek/index') ?>">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Data Kepsek</span>
         </a>
       </li>
 
@@ -79,14 +91,14 @@
           <span>Data Terlambat</span>
         </a>
       </li>
-
+      
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Transaksi_Peminjaman/index') ?>">
+        <a class="nav-link collapsed" href="<?= base_url('Transaksi_Peminjaman') ?>">
           <i class="fas fa-fw fa-cog"></i>
           <span>Data Transaksi Peminjaman</span>
         </a>
       </li>
-
+      
       <li class="nav-item">
         <a class="nav-link collapsed" href="<?= base_url('Transaksi_Pengembalian/index') ?>">
           <i class="fas fa-fw fa-cog"></i>
@@ -107,6 +119,16 @@
           <span>Laporan</span></a>
       </li>
 
+      </li>
+      <?php
+      }else{
+      ?>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('laporan/index') ?>">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Laporan</span></a>
+      </li>
+      <?php } ?>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -172,8 +194,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $this->session->userdata('nama'); ?></span>
+                <!-- <img class="img-profile rounded-circle" src=""> -->
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

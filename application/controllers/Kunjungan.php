@@ -11,7 +11,7 @@ Class Kunjungan Extends CI_Controller
 
 	public function index()
 	{
-		$data['user'] =$this->db->GET_WHERE('Pegawai',['username' => $this->session->userdata('username')])->row_array();
+		$data['user'] =$this->db->GET_WHERE('pegawai',['username' => $this->session->userdata('username')])->row_array();
 		$data['kunjungan'] = $this->M_kunjungan->tampil();
 		$this->template->utama('kunjungan/data_kunjungan',$data);
 	}

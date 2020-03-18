@@ -2,44 +2,31 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-			<center>
-		<h3>Data Terlambat</h3>
-			</center>
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Data</button>
+			 Data Buku Terlambat
+             <div class="row">
+                 <div class="col-md-4">
+                     <div class="form-group">
+                        <select id="jenis" class="form-control">
+                            <option value="">-PILIH JENIS BUKU-</option>
+                            <option value="Buku Pelajaran Umum">Buku Pelajaran Umum</option>
+                            <option value="Buku Mata Pelajaran">Buku Mata Pelajaran</option>
+                        </select>
+                     </div>
+                 </div>
+             </div>
 			</div>
 			<div class="card-body">
-				<table class="table">
+				<table class="table" id="dataTable">
 					<thead>
 						<tr>
-							<td>No</td>
-							<td>ID Terlambat</td>
 							<td>No Anggota</td>
                             <td>Tanggal Pinjaman</td>
                             <td>No Buku</td>
-                            <td>Tanggal Pengembalian</td>
-                            <td>ID Pelanggaran</td>
                             <td>ID Pegawai</td>
 							<td>Action</td>
 						</tr>
 					</thead>
-					<tbody>
-                    <?php foreach($terlambat as $i => $data): ?>
-						<tr>
-							<td><?= $i+1 ?></td>
-							<td><?= $data->id_terlambat ?></td>
-							<td><?= $data->no_anggota ?></td>
-							<td><?= $data->tgl_pj ?></td>
-							<td><?= $data->no_buku ?></td>
-							<td><?= $data->tgl_pg ?></td>
-							<td><?= $data->id_pelanggaran ?></td>
-							<td><?= $data->id_pegawai ?></td>
-							<td>
-								<button type="button" class="btn btn-primary" onclick="edit('<?= $data->id_terlambat ?>')">Edit</button>
-								<a href="<?= base_url('Terlambat/hapus/'.$data->id_terlambat) ?>" class="btn btn-danger">hapus</a>
-							</td>
-						</tr>
-					<?php endforeach ?>
-					</tbody>
+					<tbody id="isi"></tbody>
 				</table>
 			</div>	
 		</div>
@@ -144,6 +131,21 @@
 </div>
 <script src="<?= base_url('asset/vendor/jquery/jquery.min.js')?>"></script>
 <script>
+    $(document).ready(function(){
+        $('#jenis').change(function(){
+            var jenis = $(this).val();
+            $.ajax({
+                url:'<?= base_url('Terlambat/dataTerlambat') ?>',
+                type: 'POST',
+                data: {'jenis': jenis},
+                success: function(data)
+                {
+                    $('#isi').html(data)
+                }
+            })
+        })
+    })
+
 	function edit(id)
 	{
 		$.ajax({

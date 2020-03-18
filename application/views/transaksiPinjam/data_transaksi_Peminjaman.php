@@ -1,54 +1,61 @@
-<div class="row">
+ <div class="row">
     <div class="col-md-12">
   <div class="card">
     <div class="card-header">
       Peminjaman Buku
     </div> 
       <div class="card-body">
-      <form action="<?= base_url('Transaksi_Peminjaman/tambah_data') ?>">
       <div class="row">
         <div class="col-md-8">
+          <form action="<?= base_url('Transaksi_Peminjaman/tambah_data') ?>" method="POST">
           <table>
             <thead>
               <tr>
                 <td>No Anggota</td>
-                <td><input type="text" name="no_anggota" 
+                <td>
+                  <input type="text" name="no_anggota" 
                 id="noAng"
-                class="form-control" placeholder="No Anggota"></td>
-                <td><button type="button" onclick="cariAnggota()" class="btn btn-success">Cari</button></td>
+                class="form-control" placeholder="No Anggota">
+                </td>
+                <td>
+                  <button type="button" onclick="cariAnggota()" class="btn btn-success">Cari</button>
+                </td>
                 <td>No Buku</td>
-                <td colspan="2"><input type="text" id="no_buku" name="no_buku" class="form-control"></td>
+                <td colspan="2">
+                  <input type="text" id="no_buku" name="no_buku" class="form-control">
+                </td>
               </tr>
               <tr>
                 <td>Tahun Ajaran</td>
-                <td colspan="2"><input type="text" name="ta" id = "ta" readonly class="form-control" placeholder="Tahun Ajaran"></td>
+                <td colspan="2">
+                  <input type="text" name="ta" id = "ta" readonly class="form-control" placeholder="Tahun Ajaran">
+                </td>
                 <td>Tanggal Pinjam</td>
-                <td colspan="2"><input type="date" name="tgl_pj" class="form-control" placeholder="Tanggal Peminjaman"></td>
+                <td colspan="2">
+                  <input type="date" name="tgl_pj" class="form-control" placeholder="Tanggal Peminjaman">
+                </td>
               </tr>
               <tr>
                 <td>ID Pegawai</td>
-                <td colspan="2"><input type="text" name="id_pegawai" readonly class="form-control" placeholder="ID Pegawai" value="<?php echo $id?>"></td>
-                <td><td><button class="btn btn-primary btn-block">Simpan</button></td></td>
+                <td colspan="2"><input type="text" name="id_pegawai" readonly class="form-control" placeholder="ID Pegawai" value="<?php echo $user['id_pegawai']?>"></td>
+                <td><td><button type="submit" class="btn btn-primary btn-block">Simpan</button></td></td>
               </tr>
               <tr>
                 
               </tr>
             </thead>
           </table>
+          </form>
         </div>
       </div>
-      </form>
       </div>
     </div>
         <div class="card">
             <div class="card-header">
-            <center>
-                <!-- <h3>Data Transaksi Peminjaman</h3> -->
-            </center>
-            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Data</button> -->
+              Buku Yang Dipinjam
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table"  id="dataTable">
                     <thead>
                         <tr>
                             <td>No</td>
@@ -81,50 +88,6 @@
         </div>
     </div>
 </div>
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Tambah Data</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form action="<?= base_url('Transaksi_Peminjaman/tambah_data') ?>" method="post" enctype="multipart/form-data">
-            
-            <div class="form-group">
-                <label for="">Tahun Ajaran</label>
-                <input type="text" name="ta" class="form-control" id="ta" placeholder="Tahun Ajaran">
-            </div>
-            <div class="form-group">
-                <label for="">No Anggota</label>
-                <input type="text" name="no_anggota" class="form-control" placeholder="No Anggota">
-            </div>
-            <div class="form-group">
-                <label for="">No Buku</label>
-                <input type="text" name="no_buku" class="form-control" placeholder="No Buku">
-            </div>
-            <div class="form-group">
-                <label for="">Tanggal Peminjaman</label>
-                <input type="date" name="tgl_pj" class="form-control" placeholder="Tanggal Peminjaman">
-            </div>
-            <div class="form-group">
-                <label for="">ID Pegawai</label>
-                <input type="text" name="id_pegawai" class="form-control" placeholder="ID Pegawai">
-            </div>
-            <div>
-                <button class="btn btn-primary btn-block">Simpan</button>
-            </div>
-        </form>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <!-- Modal -->
 <div id="editModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -174,14 +137,13 @@
   function cariAnggota(){
     var no_anggota = $('#noAng').val();
     $.ajax({
-      url :'<?= base_url('Transaksi_peminjaman/cariSiswa') ?>',
+      url :'<?= base_url('Transaksi_Peminjaman/cariSiswa') ?>',
       type:'POST',
       data:{'no_anggota':no_anggota},
       dataType:'JSON',
       success: function(data){
         console.log(data);
         document.getElementById('ta').value = data[0].ta;
-           //document.getElementById('idPegawaiPustaka').value = data[0].id_pegawai;
 
       }
     })
