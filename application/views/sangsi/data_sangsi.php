@@ -8,7 +8,7 @@
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Data</button>
 			</div>
 			<div class="card-body">
-				<table class="table">
+				<table class="table" id="dataTable">
 					<thead>
 						<tr>
 							<td>No</td>

@@ -29,9 +29,10 @@ Class M_transaksi_peminjaman Extends CI_Model
 
     // kembali
 
-    public function tambahK($data)
+    public function tambahK($data,$id)
     {
         $this->db->insert('transaksi_pengembalian',$data);
+        $this->db->query("DELETE FROM transaksi_peminjaman WHERE id_transaksi='$id'");
     }
 
     public function tampilK()

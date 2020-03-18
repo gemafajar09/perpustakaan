@@ -32,10 +32,11 @@ Class Admin extends CI_Controller
                             $data =[
                                 'username' => $user['username'],
                                 'id_pegawai' => $user['id_pegawai'],
+                                'nama' => $user['nama_pegawai'],
                                 'level' =>$role_login
                             ];
                             $this->session->set_userdata($data);
-                            $this->session->set_flashdata('pesan','Selamat Datang '. $username ."," . $role_login);
+                            $this->session->set_flashdata('pesan','Selamat Datang ');
                             redirect('Admin/halaman');
                         }else{
                             $this->session->set_flashdata('pesan','Password Salah');
@@ -54,10 +55,35 @@ Class Admin extends CI_Controller
                             $data =[
                                 'username' => $user['username'],
                                 'no_anggota' => $user['no_anggota'],
+                                'nama' => $user['nama_siswa'],
                                 'level' =>$role_login
                             ];
                             $this->session->set_userdata($data);
-                            $this->session->set_flashdata('pesan','Selamat Datang '. $username ."," . $role_login);
+                            $this->session->set_flashdata('pesan','Selamat Datang ');
+                            redirect('Admin/halaman');
+                        }else{
+                            $this->session->set_flashdata('pesan','Password Salah');
+                            redirect('Admin');
+                        }
+                    }else{
+                        $this->session->set_flashdata('pesan','Username Salah');
+                            redirect('Admin');
+                    }
+
+                }else if($role_login == "kepsek"){
+                    $user = $this->db->GET_WHERE('kepsek',['username'=> $username])->row_array();
+                    if($user['username']== $username)
+                    {
+                        if(password_verify($password, $user['password']))
+                        {
+                            $data =[
+                                'username' => $user['username'],
+                                'no_kepsek' => $user['id_kepsek'],
+                                'nama' => $user['nama_kepsek'],
+                                'level' =>$role_login
+                            ];
+                            $this->session->set_userdata($data);
+                            $this->session->set_flashdata('pesan','Selamat Datang ');
                             redirect('Admin/halaman');
                         }else{
                             $this->session->set_flashdata('pesan','Password Salah');

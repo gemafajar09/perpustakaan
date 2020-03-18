@@ -9,7 +9,7 @@ Class Transaksi_Pengembalian Extends CI_Controller
 		
 		$this->load->model('M_transaksi_peminjaman','kembali');
 	}
-
+ 
 	public function index()
 	{
 		$data['user'] =$this->db->GET_WHERE('pegawai',['username' => $this->session->userdata('username')])->row_array();
@@ -19,19 +19,23 @@ Class Transaksi_Pengembalian Extends CI_Controller
 
 	public function tambah_data()
 	{
+		$id = $this->input->post('id');
 		$ta = $this->input->post('ta');
 		$no_anggota = $this->input->post('no_anggota');
 		$no_buku = $this->input->post('no_buku');
 		$tgl_pg = $this->input->post('tgl_pg');
 		$id_pegawai = $this->input->post('id_pegawai');
+		$denda = $this->input->post('denda');
 		$data = array(
 			'ta' => $ta,
 			'no_anggota' => $no_anggota,
 			'no_buku' => $no_buku,
 			'tgl_pg' => $tgl_pg,
-			'id_pegawai' => $id_pegawai
+			'id_pegawai' => $id_pegawai,
+			'denda' => $denda,
 		);
-		$this->kembali->tambahK($data);
+		// var_dump($data); exit;
+		$this->kembali->tambahK($data,$id);
 
 		redirect('Transaksi_Pengembalian/index');
 	}

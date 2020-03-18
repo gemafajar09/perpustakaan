@@ -5,52 +5,64 @@
       Pengembalian Buku
     </div> 
     <div class="card-body">
-    <form action="">
     <div class="row">
       <div class="col-md-8">
         <table>
+          <form action="<?= base_url('Transaksi_Pengembalian/tambah_data') ?>" method="POST">
           <thead>
             <tr>
               <td>No Anggota</td>
               <td>
-                <input type="text" class="form-control" id="idAnggota" placeholder="no anggota">
+                <input type="text" class="form-control" name="no_anggota" id="idAnggota" placeholder="no anggota">
                 <input type="hidden" class="form-control" name="id" id="id">
               </td>
-              <td><button type="button" onclick="cariAnggota()" class="btn btn-success">Cari</button></td>
+              <td>
+                <button type="button" onclick="cariAnggota()" class="btn btn-success">Cari</button>
+              </td>
               <td>No Buku</td>
               <td colspan="2">
                 <input type="text" readonly id="no_buku" name="no_buku" class="form-control">
-                <input type="text" readonly id="jenisBuku">
+                <input type="hidden" readonly id="jenisBuku">
               </td>
             </tr>
             <tr>
               <td>Tahun Ajaran</td>
-              <td colspan="2"><input type="text" name="ta" readonly id="ta" class="form-control"></td>
+              <td colspan="2">
+                <input type="text" name="ta" readonly id="ta" class="form-control">
+              </td>
               <td>Tanggal Pengembalian</td>
-              <td colspan="2"><input type="date" name="tgl_pg" id="tglPengembalian" class="form-control"></td>
+              <td colspan="2">
+                <input type="date" name="tgl_pg" id="tglPengembalian" class="form-control">
+              </td>
             </tr>
             <tr>
               <td>ID Pegawai</td>
-              <td colspan="2"><input type="number" readonly name="id_pegawai" id="idPegawaiPustaka" class="form-control"></td>
-              <td>Sangsi</td>
-              <td colspan="2"><input type="text" readonly name="sangsi" id="sangsi" class="form-control"></td>
+              <td colspan="2">
+                <input type="number" readonly name="id_pegawai" id="idPegawaiPustaka" class="form-control">
+              </td>
+              <td>Denda</td>
+              <td colspan="2">
+                <input type="text" readonly name="denda" id="sangsi" class="form-control">
+              </td>
             </tr>
             <tr>
               <td>Tanggal Pinjam</td>
               <td colspan="2"><input type="date" readonly name="tgl_pj" id="tglPinjamBuku" class="form-control"></td>
               <td></td>
-              <td><button class="btn btn-primary btn-block">Success</button></td>
+              <td>
+                <button type="submit" class="btn btn-primary btn-block">Success</button>
+              </td>
             </tr>
           </thead>
+          </form>
         </table>
       </div>
     </div>
-    </form>
     </div>
   </div>
 		<div class="card">
 			<div class="card-body">
-				<table class="table">
+				<table class="table" id="dataTable">
 					<thead>
 						<tr>
 							<td>No</td>
@@ -59,12 +71,12 @@
               <td>No Buku</td>
               <td>Tanggal Pengembalian</td>
               <td>ID Pegawai</td>
-              <td>Sangsi</td>
+              <td>Denda</td>
 							<td>Action</td>
 						</tr>
 					</thead>
 					<tbody>
-                    <?php foreach($transaksi_pengembalian as $i => $data): ?>
+          <?php foreach($transaksi_pengembalian as $i => $data): ?>
 						<tr>
 							<td><?= $i+1 ?></td>
 							<td><?= $data->ta ?></td>
@@ -72,7 +84,7 @@
 							<td><?= $data->no_buku ?></td>
 							<td><?= $data->tgl_pg ?></td>
 							<td><?= $data->id_pegawai ?></td>
-              <td></td>
+              <td><?= $data->denda ?></td>
 							<td>
 								<button type="button" class="btn btn-primary" onclick="edit('<?= $data->id_transaksi ?>')">Edit</button>
 								<a href="<?= base_url('Transaksi_Pengembalian/hapus/'.$data->id_transaksi) ?>" class="btn btn-danger">hapus</a>
@@ -130,6 +142,35 @@
 </div>
 <script src="<?= base_url('asset/vendor/jquery/jquery.min.js')?>"></script>
 <script>
+  function simpanData()
+  {
+    var ta = $('#ta').val();
+    var no_anggota = $('#no_anggota').val();
+    var no_buku = $('#no_buku').val();
+    var id = $('#id').val();
+    var tgl_pg = $('#tgl_pg').val();
+    var id_pegawai = $('#id_pegawai').val();
+    var denda = $('#sangsi').val();
+    $.ajax({
+      url:'<?= base_url('Transaksi_Pengembalian/tambah_data') ?>',
+      type: 'POST',
+      data: {
+        'ta': ta,
+        'no_anggota': no_anggota,
+        'no_buku': no_buku,
+        'id':id,
+        'tgl_pg': tgl_pg,
+        'id_pegawai': id_pegawai,
+        'denda': denda
+      },
+      dataType: 'JSON',
+      success: function(data)
+      {
+        console.log('SUCCESS')
+      }
+    })
+  }
+
 	function edit(id) 
 	{
 		$.ajax({
@@ -177,9 +218,7 @@
     var tgl_kembali = new Date(document.getElementById("tglPengembalian").value).getTime();
     var selisih_hari = Math.floor((tgl_kembali - tgl_pinjam)/86400)/1000;
     var denda = 0;
-    var batas_waktu_denda_minimal= 0; // hari
-    // alert(jenis_buku)
-    // jika jenis buku = ... maka batas waktu denda minimal = ...
+    var batas_waktu_denda_minimal= 0;
     if(jenis_buku == "Buku Mata Pelajaran")
     {
       batas_waktu_denda_minimal = 150;
@@ -188,7 +227,6 @@
     {
       batas_waktu_denda_minimal = 14;
     }
-    // alert(batas_waktu_denda_minimal)
     if(selisih_hari > batas_waktu_denda_minimal)
     {
       denda = (selisih_hari - batas_waktu_denda_minimal) * 500;
