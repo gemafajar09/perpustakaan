@@ -1,20 +1,20 @@
 <?php
-Class Transaksi_Pengembalian Extends CI_Controller
+class Transaksi_Pengembalian extends CI_Controller
 {
 	public function __construct()
-    {
+	{
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->library('template');
-		
-		$this->load->model('M_transaksi_peminjaman','kembali');
+
+		$this->load->model('M_transaksi_peminjaman', 'kembali');
 	}
- 
+
 	public function index()
 	{
-		$data['user'] =$this->db->GET_WHERE('pegawai',['username' => $this->session->userdata('username')])->row_array();
+		$data['user'] = $this->db->GET_WHERE('pegawai', ['username' => $this->session->userdata('username')])->row_array();
 		$data['transaksi_pengembalian'] = $this->kembali->tampilK();
-		$this->template->utama('transaksi_pengembalian/data_transaksi_pengembalian',$data);
+		$this->template->utama('transaksi_pengembalian/data_transaksi_pengembalian', $data);
 	}
 
 	public function tambah_data()
@@ -24,6 +24,7 @@ Class Transaksi_Pengembalian Extends CI_Controller
 		$no_anggota = $this->input->post('no_anggota');
 		$no_buku = $this->input->post('no_buku');
 		$tgl_pg = $this->input->post('tgl_pg');
+		$tgl_pj = $this->input->post('tgl_pj');
 		$id_pegawai = $this->input->post('id_pegawai');
 		$denda = $this->input->post('denda');
 		$data = array(
@@ -31,11 +32,12 @@ Class Transaksi_Pengembalian Extends CI_Controller
 			'no_anggota' => $no_anggota,
 			'no_buku' => $no_buku,
 			'tgl_pg' => $tgl_pg,
+			'tgl_pj' => $tgl_pj,
 			'id_pegawai' => $id_pegawai,
 			'denda' => $denda,
 		);
 		// var_dump($data); exit;
-		$this->kembali->tambahK($data,$id);
+		$this->kembali->tambahK($data, $id);
 
 		redirect('Transaksi_Pengembalian/index');
 	}
@@ -68,8 +70,9 @@ Class Transaksi_Pengembalian Extends CI_Controller
 			'id_pegawai' => $id_pegawai
 		);
 		$where = array(
-			'id_transaksi' => $id_transaksi,);
-		$this->kembali->simpanEditK($data,$where);
+			'id_transaksi' => $id_transaksi,
+		);
+		$this->kembali->simpanEditK($data, $where);
 
 		redirect('Transaksi_Pengembalian/index');
 	}

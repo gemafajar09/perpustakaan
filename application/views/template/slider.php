@@ -11,8 +11,8 @@
         </div>
         <div class="sidebar-brand-text mx-3">
           <?php
-              echo $this->session->userdata('nama');
-          ?>  
+          echo $this->session->userdata('nama');
+          ?>
         </div>
       </a>
 
@@ -35,99 +35,99 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <?php if($this->session->userdata('level') == "super"){?>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Buku/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Buku Perpustakaan</span>
-        </a>
-      </li>
+      <?php if ($this->session->userdata('level') == "super") { ?>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Buku/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Buku Perpustakaan</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Kelas/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Kelas Siswa</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Kelas/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Kelas Siswa</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Kunjungan/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Kunjungan</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Kunjungan/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Kunjungan</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Kepsek/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Kepsek</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Kepsek/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Kepsek</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Pegawai/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Pegawai</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Pegawai/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Pegawai</span>
+          </a>
+        </li>
 
-       <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Sangsi/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Sangsi</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Sangsi/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Sangsi</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Siswa/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Siswa</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Siswa/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Siswa</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Terlambat/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Terlambat</span>
-        </a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Transaksi_Peminjaman') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Transaksi Peminjaman</span>
-        </a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('Transaksi_Pengembalian/index') ?>">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Transaksi Pengembalian</span>
-        </a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Terlambat/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Terlambat</span>
+          </a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>SMS Gateway</span></a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Transaksi_Peminjaman') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Transaksi Peminjaman</span>
+          </a>
+        </li>
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('laporan/index') ?>">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Laporan</span></a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="<?= base_url('Transaksi_Pengembalian/index') ?>">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Data Transaksi Pengembalian</span>
+          </a>
+        </li>
 
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="charts.html">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>SMS Gateway</span></a>
+        </li>
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('laporan/index') ?>">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Laporan</span></a>
+        </li>
+
+        </li>
       <?php
-      }else{
+      } else {
       ?>
-      <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('laporan/index') ?>">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Laporan</span></a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('laporan/index') ?>">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Laporan</span></a>
+        </li>
       <?php } ?>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
