@@ -107,7 +107,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="<?= base_url('sms/index') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>SMS Gateway</span></a>
         </li>
